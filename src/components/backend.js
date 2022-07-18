@@ -4,13 +4,7 @@ const provider = new ethers.providers.JsonRpcProvider('https://mainnet.infura.io
 
 async function checkNameList(names) {
     for(let i in names){
-        provider.resolveName(names[i] + ".eth").then(ens => {
-            if(ens === null){
-                console.log(names[i] + ".eth is available!");
-            }else{
-                console.log(names[i] + ".eth is owned by " + ens);
-            }
-        })
+        checkSingleName(names[i])
     }
 }
 
