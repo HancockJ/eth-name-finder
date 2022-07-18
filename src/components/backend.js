@@ -14,6 +14,18 @@ async function checkNameList(names) {
     }
 }
 
+function create999ClubList() {
+    let names = []
+    for(let a = 0; a < 10; a++){
+        for(let b = 0; b < 10; b++){
+            for(let c = 0; c < 10; c++){
+                names.push(String(a) + String(b) + String(c));
+            }
+        }
+    }
+    return names;
+}
+
 async function checkSingleName(name) {
         provider.resolveName(name + ".eth").then(ens => {
             if(ens === null){
@@ -37,9 +49,10 @@ function createTestNames() {
     return names;
 }
 
-let names = createTestNames();
+// let names = createTestNames();
+let names = create999ClubList();
 // console.log(names)
 
 // Input an array of string names. Do not include .eth
-checkSingleName("vitalik");
+// checkSingleName("vitalik");
 checkNameList(names);
