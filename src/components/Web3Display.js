@@ -12,9 +12,11 @@ function Web3Display() {
     const get_matches = (string) => {
         try {
             const pattern = genex(string);
-            let matches = pattern.generate();
-            let legalMatches = matches.filter(word => /^[A-Za-z\d]*$/.test(word));
-            setMatches(legalMatches)
+            if(pattern.count() < 1000){
+                let matches = pattern.generate();
+                let legalMatches = matches.filter(word => /^[A-Za-z\d]*$/.test(word));
+                setMatches(legalMatches)
+            }
         } catch (error) {
             setMatches([string])   
         }
