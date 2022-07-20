@@ -12,9 +12,9 @@ function Web3Display() {
     const get_matches = (string) => {
         try {
             const pattern = genex(string);
-        let matches = pattern.generate()
-        console.log(matches)
-        setMatches(matches)
+            let matches = pattern.generate();
+            let legalMatches = matches.filter(word => /^[A-Za-z\d]*$/.test(word));
+            setMatches(legalMatches)
         } catch (error) {
             setMatches([string])   
         }
@@ -48,13 +48,14 @@ function Web3Display() {
         (
             <div>
                 <h3>Ethereum Name Finding Service</h3>
-                <h5>You are connected to the {blockchain.ethers.network.name} network.</h5>
+                {blockchain.ethers.network ? <h5>You are connected to the {blockchain.ethers.network.name} network.</h5> : null}
                 <input type="text" onChange={event => {setName(event.target.value)
                 get_matches(event.target.value)}}/>
                 <button onClick={checkName}>Check Name</button>
-                <p>{output}</p> 
-                <ul>MATCHES{matches.map(match =>{
-                    return <><li>{match}</li></>
+                <p>{output}</p>
+                {matches[0] !== '' && matches.length > 0 ? <p>This string yields {matches.length} combinations.</p> : null}
+                <ul>Combinations:{matches.map(match =>{
+                    return <li key={match}>{match}</li>
                 })}</ul>
             </div>
         ) : (

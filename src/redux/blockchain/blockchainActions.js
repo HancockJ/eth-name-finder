@@ -1,10 +1,11 @@
-import {ethers} from "ethers";
+const {ethers} = require("ethers");
+
 
 export const connectProvider = () => {
     console.log("Connecting to provider...")
     return async (dispatch) => {
         dispatch(providerRequest());
-        let provider = ethers.getDefaultProvider('ropsten');
+        const provider = new ethers.providers.JsonRpcProvider('https://ropsten.infura.io/v3/d163401424514af5bd48d03741865114');
         if (provider) {
             dispatch(
                 connectSuccess({
